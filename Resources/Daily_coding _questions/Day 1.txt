@@ -1,0 +1,195 @@
+Day 1
+
+1. Input and Print
+Write a program to input a number and print it.
+
+2. Add Two Numbers
+Write a program to input two numbers and print their sum.
+
+3. Calculate Area of Rectangle
+Write a program to input length and width, then calculate and print the area of the rectangle.
+
+4. Swap Two Numbers
+Write a program to swap two numbers using a third variable and display the result.
+
+5. Check Even or Odd
+Write a program to input a number and check whether it is even or odd.
+
+6. Find Largest of Two Numbers
+Write a program to input two numbers and print the largest one.
+
+7. Simple Calculator
+Write a program to input two numbers and display their addition, subtraction, multiplication, and division.
+
+8. Print Table of a Number
+Write a program to input a number and print its multiplication table up to 10.
+
+9. Sum of First N Natural Numbers
+Write a program to input a number N and print the sum of first N natural numbers.
+
+10. Find Factorial of a Number
+Write a program to input a number and calculate its factorial.
+
+
+
+
+-------------------------------------------------------------------------------------------------------------
+
+
+ 1. Input and Print
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int number;
+    cout << "Enter a number: ";
+    cin >> number;
+    cout << "You entered: " << number << endl;
+    return 0;
+}
+
+ 2. Add Two Numbers
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a, b, sum;
+    cout << "Enter two numbers: ";
+    cin >> a >> b;
+    sum = a + b;
+    cout << "Sum: " << sum << endl;
+    return 0;
+}
+
+ 3. Calculate Area of Rectangle
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    float length, width, area;
+    cout << "Enter length and width: ";
+    cin >> length >> width;
+    area = length * width;
+    cout << "Area of Rectangle: " << area << endl;
+    return 0;
+}
+
+ 4. Swap Two Numbers (Using Third Variable)
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a, b, temp;
+    cout << "Enter two numbers: ";
+    cin >> a >> b;
+    temp = a;
+    a = b;
+    b = temp;
+    cout << "After swapping: a = " << a << ", b = " << b << endl;
+    return 0;
+}
+
+ 5. Check Even or Odd
+#include <iostream>
+using namespace std;
+
+int main() {
+    int num;
+    cout << "Enter a number: ";
+    cin >> num;
+
+    if (num % 2 == 0)
+        cout << num << " is Even" << endl;
+    else
+        cout << num << " is Odd" << endl;
+
+    return 0;
+}
+
+ 6. Find Largest of Two Numbers
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a, b;
+    cout << "Enter two numbers: ";
+    cin >> a >> b;
+
+    if (a > b)
+        cout << a << " is larger" << endl;
+    else
+        cout << b << " is larger" << endl;
+
+    return 0;
+}
+
+ 7. Simple Calculator
+#include <iostream>
+using namespace std;
+
+int main() {
+    float a, b;
+    cout << "Enter two numbers: ";
+    cin >> a >> b;
+
+    cout << "Addition: " << a + b << endl;
+    cout << "Subtraction: " << a - b << endl;
+    cout << "Multiplication: " << a * b << endl;
+    cout << "Division: " << a / b << endl;
+
+    return 0;
+}
+
+ 8. Print Table of a Number
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cout << "Enter a number: ";
+    cin >> n;
+
+    for (int i = 1; i <= 10; i++) {
+        cout << n << " x " << i << " = " << n * i << endl;
+    }
+
+    return 0;
+}
+
+ 9. Sum of First N Natural Numbers
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, sum = 0;
+    cout << "Enter a number: ";
+    cin >> n;
+
+    for (int i = 1; i <= n; i++) {
+        sum += i;
+    }
+
+    cout << "Sum of first " << n << " numbers is: " << sum << endl;
+    return 0;
+}
+
+ 10. Find Factorial of a Number
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n, factorial = 1;
+    cout << "Enter a number: ";
+    cin >> n;
+
+    for (int i = 1; i <= n; i++) {
+        factorial *= i;
+    }
+
+    cout << "Factorial of " << n << " is: " << factorial << endl;
+    return 0;
+}

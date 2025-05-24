@@ -1,0 +1,263 @@
+Day 8
+
+🔹 File Handling Basics
+1.Write a program to create a text file and write "Hello, C++ File!" into it.
+
+2.Write a program to read content from a text file and display it on the screen.
+
+🔹 Reading and Writing to Files
+3.Write a program to write user input (name and age) to a file.
+
+4.Write a program to read a list of integers from a file and calculate their sum.
+
+🔹 Handling Exceptions (try, catch, throw)
+5.Write a program that throws an exception if the user enters a negative number.
+
+6.Write a program that divides two numbers and handles divide-by-zero exceptions using try-catch.
+
+🔹 Custom Exception Classes
+7.Create a custom exception class InvalidAgeException and throw it if age < 0.
+
+8.Create a class BankAccount that throws a custom InsufficientBalance exception if withdrawal exceeds balance.
+
+🔹 Combined File and Exception Handling
+9.Write a program to open a file and handle an exception if the file cannot be opened.
+
+10.Write a program to read from a file and handle any input failure (like unexpected file format) using try-catch.
+
+
+---------------------------------------------------------------------------------------------------------------------------
+
+
+1. Write a program to create a text file and write "Hello, C++ File!" into it.
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+    ofstream file("example.txt");
+    file << "Hello, C++ File!";
+    file.close();
+    cout << "File written successfully." << endl;
+    return 0;
+}
+
+ 2. Read content from a text file and display it.
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+    string line;
+    ifstream file("example.txt");
+
+    if (file.is_open()) {
+        while (getline(file, line)) {
+            cout << line << endl;
+        }
+        file.close();
+    } else {
+        cout << "Unable to open file." << endl;
+    }
+    return 0;
+}
+
+
+ 3. Write user input (name and age) to a file.
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+    string name;
+    int age;
+    ofstream file("user.txt");
+
+    cout << "Enter name: ";
+    cin >> name;
+    cout << "Enter age: ";
+    cin >> age;
+
+    file << "Name: " << name << "\nAge: " << age << endl;
+    file.close();
+    return 0;
+}
+
+
+ 4. Read integers from a file and calculate their sum.
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+    ifstream file("numbers.txt");
+    int num, sum = 0;
+
+    while (file >> num) {
+        sum += num;
+    }
+
+    cout << "Sum: " << sum << endl;
+    file.close();
+    return 0;
+}
+
+
+ 5. Throw exception if user enters a negative number.
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int num;
+    cout << "Enter a number: ";
+    cin >> num;
+
+    try {
+        if (num < 0)
+            throw "Negative number entered!";
+        cout << "You entered: " << num << endl;
+    } catch (const char* msg) {
+        cout << "Exception: " << msg << endl;
+    }
+
+    return 0;
+}
+
+
+ 6. Handle divide-by-zero exception using try-catch.
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a, b;
+    cout << "Enter two numbers (a b): ";
+    cin >> a >> b;
+
+    try {
+        if (b == 0)
+            throw "Division by zero!";
+        cout << "Result: " << a / b << endl;
+    } catch (const char* msg) {
+        cout << "Error: " << msg << endl;
+    }
+
+    return 0;
+}
+
+
+ 7. Custom exception class InvalidAgeException.
+
+
+#include <iostream>
+using namespace std;
+
+class InvalidAgeException {
+public:
+    const char* what() {
+        return "Age cannot be negative!";
+    }
+};
+
+int main() {
+    int age;
+    cout << "Enter age: ";
+    cin >> age;
+
+    try {
+        if (age < 0)
+            throw InvalidAgeException();
+        cout << "Valid age: " << age << endl;
+    } catch (InvalidAgeException e) {
+        cout << "Exception: " << e.what() << endl;
+    }
+
+    return 0;
+}
+
+
+ 8. BankAccount with InsufficientBalance exception.
+
+#include <iostream>
+using namespace std;
+
+class InsufficientBalance {
+public:
+    const char* what() {
+        return "Insufficient balance for withdrawal!";
+    }
+};
+
+class BankAccount {
+    int balance;
+public:
+    BankAccount(int b) : balance(b) {}
+
+    void withdraw(int amount) {
+        if (amount > balance)
+            throw InsufficientBalance();
+        balance -= amount;
+        cout << "Withdrawal successful. Balance: " << balance << endl;
+    }
+};
+
+int main() {
+    BankAccount account(1000);
+
+    try {
+        account.withdraw(1500);
+    } catch (InsufficientBalance e) {
+        cout << "Exception: " << e.what() << endl;
+    }
+
+    return 0;
+}
+
+
+ 9. Open a file and handle if it fails.
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+    ifstream file("nofile.txt");
+
+    try {
+        if (!file)
+            throw "File could not be opened!";
+        cout << "File opened successfully." << endl;
+    } catch (const char* msg) {
+        cout << "Exception: " << msg << endl;
+    }
+
+    return 0;
+}
+
+
+ 10. Read from a file and handle format/input failure.
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+    ifstream file("data.txt");
+    int x;
+
+    try {
+        if (!(file >> x))
+            throw "Input failure or wrong format!";
+        cout << "Read value: " << x << endl;
+    } catch (const char* msg) {
+        cout << "Exception: " << msg << endl;
+    }
+
+    file.close();
+    return 0;
+}

@@ -1,0 +1,308 @@
+Day 2
+
+ 1. Create a Simple Class
+Create a class Person with public members name and age. Use an object to set values and display them.
+
+2. Use Private Members
+Create a class Rectangle with private members length and width. Add a public function to set values and display the area.
+
+3. Constructor Initialization
+Create a class Student that takes name and roll number as constructor parameters and displays them using a function.
+
+4. Scope Resolution Operator Example
+Create a class Calculator with a function add() declared inside the class and defined using the scope resolution operator (::) outside the class.
+
+5. Use Protected Members
+Create a class Base with a protected variable. Derive a class Derived and use the protected variable in a public function.
+
+6. Object with Multiple Functions
+Create a class Circle with a private radius and public functions to input the radius and calculate the area.
+
+7. Multiple Objects of a Class
+Create a class Employee and make three objects. Store and display data for three different employees using each object.
+
+8. Inline Member Function
+Create a class Number with an inline function that displays the square of a number.
+
+9. Class with Default Constructor
+Create a class Box with private variables length, width, and height. Use a default constructor to initialize and display the volume.
+
+10. Class with Setters and Getters
+Create a class Account with private members accountNumber and balance. Use public setter and getter functions to assign and access the values.
+
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+
+ 1. Create a Simple Class
+#include <iostream>
+using namespace std;
+
+class Person {
+public:
+    string name;
+    int age;
+
+    void display() {
+        cout << "Name: " << name << ", Age: " << age << endl;
+    }
+};
+
+int main() {
+    Person p;
+    p.name = "Alice";
+    p.age = 25;
+    p.display();
+    return 0;
+}
+
+ 2. Use Private Members
+
+
+#include <iostream>
+using namespace std;
+
+class Rectangle {
+private:
+    int length, width;
+
+public:
+    void setData(int l, int w) {
+        length = l;
+        width = w;
+    }
+
+    void area() {
+        cout << "Area: " << length * width << endl;
+    }
+};
+
+int main() {
+    Rectangle r;
+    r.setData(5, 4);
+    r.area();
+    return 0;
+}
+
+ 3. Constructor Initialization
+
+#include <iostream>
+using namespace std;
+
+class Student {
+public:
+    string name;
+    int roll;
+
+    Student(string n, int r) {
+        name = n;
+        roll = r;
+    }
+
+    void show() {
+        cout << "Name: " << name << ", Roll: " << roll << endl;
+    }
+};
+
+int main() {
+    Student s("John", 101);
+    s.show();
+    return 0;
+}
+
+ 4. Scope Resolution Operator Example
+
+#include <iostream>
+using namespace std;
+
+class Calculator {
+public:
+    void add(int a, int b);
+};
+
+void Calculator::add(int a, int b) {
+    cout << "Sum: " << a + b << endl;
+}
+
+int main() {
+    Calculator c;
+    c.add(10, 20);
+    return 0;
+}
+
+ 5. Use Protected Members
+
+#include <iostream>
+using namespace std;
+
+class Base {
+protected:
+    int x;
+};
+
+class Derived : public Base {
+public:
+    void setX(int val) {
+        x = val;
+    }
+
+    void display() {
+        cout << "Value of x: " << x << endl;
+    }
+};
+
+int main() {
+    Derived d;
+    d.setX(50);
+    d.display();
+    return 0;
+}
+
+ 6. Object with Multiple Functions
+
+#include <iostream>
+using namespace std;
+
+class Circle {
+private:
+    float radius;
+
+public:
+    void setRadius(float r) {
+        radius = r;
+    }
+
+    void area() {
+        cout << "Area: " << 3.14 * radius * radius << endl;
+    }
+};
+
+int main() {
+    Circle c;
+    c.setRadius(5);
+    c.area();
+    return 0;
+}
+
+ 7. Multiple Objects of a Class
+
+#include <iostream>
+using namespace std;
+
+class Employee {
+public:
+    string name;
+    int id;
+
+    void setData(string n, int i) {
+        name = n;
+        id = i;
+    }
+
+    void show() {
+        cout << "Name: " << name << ", ID: " << id << endl;
+    }
+};
+
+int main() {
+    Employee e1, e2, e3;
+
+    e1.setData("Alice", 1);
+    e2.setData("Bob", 2);
+    e3.setData("Charlie", 3);
+
+    e1.show();
+    e2.show();
+    e3.show();
+
+    return 0;
+}
+
+ 8. Inline Member Function
+
+#include <iostream>
+using namespace std;
+
+class Number {
+public:
+    int value;
+
+    void setValue(int v) {
+        value = v;
+    }
+
+    inline void square() {
+        cout << "Square: " << value * value << endl;
+    }
+};
+
+int main() {
+    Number n;
+    n.setValue(7);
+    n.square();
+    return 0;
+}
+
+ 9. Class with Default Constructor
+
+#include <iostream>
+using namespace std;
+
+class Box {
+private:
+    int length, width, height;
+
+public:
+    Box() {
+        length = 2;
+        width = 3;
+        height = 4;
+    }
+
+    void volume() {
+        cout << "Volume: " << length * width * height << endl;
+    }
+};
+
+int main() {
+    Box b;
+    b.volume();
+    return 0;
+}
+
+10. Class with Setters and Getters
+
+#include <iostream>
+using namespace std;
+
+class Account {
+private:
+    int accountNumber;
+    float balance;
+
+public:
+    void setAccount(int acc, float bal) {
+        accountNumber = acc;
+        balance = bal;
+    }
+
+    int getAccountNumber() {
+        return accountNumber;
+    }
+
+    float getBalance() {
+        return balance;
+    }
+};
+
+int main() {
+    Account a;
+    a.setAccount(12345, 1000.50);
+
+    cout << "Account No: " << a.getAccountNumber() << endl;
+    cout << "Balance: $" << a.getBalance() << endl;
+
+    return 0;
+}

@@ -1,0 +1,355 @@
+Day 3
+
+1. Default Constructor
+Write a C++ program to define a class Book that has a default constructor which initializes title and author to "Unknown" and price to 0. Display the values after creating an object.
+
+2. Parameterized Constructor
+Write a program to define a class Product that has a parameterized constructor which initializes productName and price. Create an object of the class and initialize it with some values.
+
+3. Copy Constructor
+Create a class Employee that contains data members name and salary. Implement a copy constructor to copy the values from one object to another. Display the copied values.
+
+4. Constructor Overloading
+Write a program that defines a class Rectangle. The class should have overloaded constructors: one that initializes both length and width, and another that initializes only the length and sets width to a default value of 5.
+
+5. Destructor Basics
+Write a program that creates a class Car with a constructor that initializes the model and price. Define a destructor that outputs a message indicating the object is destroyed when the object goes out of scope.
+
+6. Destructor for Memory Management
+Write a program that dynamically allocates memory for an array of integers using new and deallocates it using a destructor. The destructor should print a message indicating the memory is freed.
+
+7. Copy Constructor with Dynamic Memory Allocation
+Create a class Student that has a dynamically allocated array of integers (e.g., marks). Implement a copy constructor to properly copy the dynamically allocated memory and avoid memory leaks.
+
+8. Constructor Overloading with Default and Parameterized Values
+Define a class Person with two constructors: one that initializes both name and age (parameterized constructor) and another that initializes name to "Anonymous" and age to 0 (default constructor). Create objects using both constructors.
+
+9. Constructor Initialization List
+Write a program that uses an initialization list in the constructor to initialize a Book class with title, author, and price values. Use a parameterized constructor to initialize the values when an object is created.
+
+10. Destructor and Object Lifecycle
+Write a program that demonstrates the role of destructors by creating objects in a function. When the function ends and the objects go out of scope, the destructor should be called automatically to release any resources.
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+1. Default Constructor
+
+#include <iostream>
+using namespace std;
+
+class Book {
+public:
+    string title;
+    string author;
+    float price;
+
+    // Default constructor
+    Book() {
+        title = "Unknown";
+        author = "Unknown";
+        price = 0;
+    }
+
+    void display() {
+        cout << "Title: " << title << ", Author: " << author << ", Price: $" << price << endl;
+    }
+};
+
+int main() {
+    Book b;
+    b.display();
+    return 0;
+}
+ 2. Parameterized Constructor
+
+#include <iostream>
+using namespace std;
+
+class Product {
+public:
+    string productName;
+    float price;
+
+    // Parameterized constructor
+    Product(string name, float p) {
+        productName = name;
+        price = p;
+    }
+
+    void display() {
+        cout << "Product Name: " << productName << ", Price: $" << price << endl;
+    }
+};
+
+int main() {
+    Product p("Laptop", 999.99);
+    p.display();
+    return 0;
+}
+
+ 3. Copy Constructor
+
+#include <iostream>
+using namespace std;
+
+class Employee {
+public:
+    string name;
+    float salary;
+
+    // Default constructor
+    Employee() {}
+
+    // Parameterized constructor
+    Employee(string n, float s) {
+        name = n;
+        salary = s;
+    }
+
+    // Copy constructor
+    Employee(const Employee &e) {
+        name = e.name;
+        salary = e.salary;
+    }
+
+    void display() {
+        cout << "Name: " << name << ", Salary: $" << salary << endl;
+    }
+};
+
+int main() {
+    Employee e1("John", 50000);
+    Employee e2 = e1; // Using copy constructor
+    e2.display();
+    return 0;
+}
+
+ 4. Constructor Overloading
+
+#include <iostream>
+using namespace std;
+
+class Rectangle {
+public:
+    float length, width;
+
+    // Parameterized constructor
+    Rectangle(float l, float w) {
+        length = l;
+        width = w;
+    }
+
+    // Constructor with default value
+    Rectangle(float l) {
+        length = l;
+        width = 5; // Default width
+    }
+
+    void display() {
+        cout << "Length: " << length << ", Width: " << width << endl;
+    }
+};
+
+int main() {
+    Rectangle r1(10, 20);  // Parameterized constructor
+    Rectangle r2(10);       // Constructor with default width
+    r1.display();
+    r2.display();
+    return 0;
+}
+
+ 5. Destructor Basics
+
+#include <iostream>
+using namespace std;
+
+class Car {
+public:
+    string model;
+    float price;
+
+    // Constructor
+    Car(string m, float p) {
+        model = m;
+        price = p;
+        cout << "Car created: " << model << endl;
+    }
+
+    // Destructor
+    ~Car() {
+        cout << "Car destroyed: " << model << endl;
+    }
+};
+
+int main() {
+    Car c("Tesla", 50000);
+    return 0;
+}
+
+ 6. Destructor for Memory Management
+
+#include <iostream>
+using namespace std;
+
+class MemoryManager {
+public:
+    int* arr;
+
+    // Constructor to allocate memory
+    MemoryManager(int size) {
+        arr = new int[size];
+        cout << "Memory allocated for array." << endl;
+    }
+
+    // Destructor to deallocate memory
+    ~MemoryManager() {
+        delete[] arr;
+        cout << "Memory deallocated." << endl;
+    }
+};
+
+int main() {
+    MemoryManager mm(5);
+    return 0;
+}
+
+ 7. Copy Constructor with Dynamic Memory Allocation
+
+#include <iostream>
+using namespace std;
+
+class Student {
+public:
+    int* marks;
+    int size;
+
+    // Parameterized constructor
+    Student(int s) {
+        size = s;
+        marks = new int[size];
+    }
+
+    // Copy constructor
+    Student(const Student &s) {
+        size = s.size;
+        marks = new int[size];
+        for (int i = 0; i < size; i++) {
+            marks[i] = s.marks[i];
+        }
+    }
+
+    // Destructor to free memory
+    ~Student() {
+        delete[] marks;
+    }
+
+    void display() {
+        for (int i = 0; i < size; i++) {
+            cout << marks[i] << " ";
+        }
+        cout << endl;
+    }
+};
+
+int main() {
+    Student s1(3);
+    s1.marks[0] = 80;
+    s1.marks[1] = 90;
+    s1.marks[2] = 85;
+
+    Student s2 = s1; // Using copy constructor
+    s2.display();
+
+    return 0;
+}
+
+ 8. Constructor Overloading with Default and Parameterized Values
+
+#include <iostream>
+using namespace std;
+
+class Person {
+public:
+    string name;
+    int age;
+
+    // Default constructor
+    Person() {
+        name = "Anonymous";
+        age = 0;
+    }
+
+    // Parameterized constructor
+    Person(string n, int a) {
+        name = n;
+        age = a;
+    }
+
+    void display() {
+        cout << "Name: " << name << ", Age: " << age << endl;
+    }
+};
+
+int main() {
+    Person p1;
+    Person p2("John", 25);
+    p1.display();
+    p2.display();
+    return 0;
+}
+
+ 9. Constructor Initialization List
+
+#include <iostream>
+using namespace std;
+
+class Book {
+public:
+    string title;
+    string author;
+    float price;
+
+    // Constructor using initialization list
+    Book(string t, string a, float p) : title(t), author(a), price(p) {}
+
+    void display() {
+        cout << "Title: " << title << ", Author: " << author << ", Price: $" << price << endl;
+    }
+};
+
+int main() {
+    Book b("C++ Programming", "Author Name", 29.99);
+    b.display();
+    return 0;
+}
+
+ 10. Destructor and Object Lifecycle
+
+#include <iostream>
+using namespace std;
+
+class Item {
+public:
+    string name;
+
+    // Constructor
+    Item(string n) {
+        name = n;
+        cout << "Item " << name << " created." << endl;
+    }
+
+    // Destructor
+    ~Item() {
+        cout << "Item " << name << " destroyed." << endl;
+    }
+};
+
+void createItem() {
+    Item i1("Laptop");
+}
+
+int main() {
+    createItem(); // Item is created and destroyed within this function scope
+    return 0;
+}

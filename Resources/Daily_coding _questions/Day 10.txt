@@ -1,0 +1,144 @@
+Day 10
+
+1. Write a function template findMax that takes two inputs of the same type and returns the greater one. Read two values of type int, float, or char from input and print the maximum using your template.
+
+2. Use the STL vector to store n integers and print the sum of all elements using a loop.
+
+3. Create a class template Calculator that reads two values of a given data type and prints their sum, difference, product, and division.
+
+4. Simulate stack operations using STL. Read n integers and push them onto a stack. Then pop the top element and print the new top.
+
+5. Read n integers and sort them using STL sort(). Then print the sorted numbers.
+
+-----------------------------------------------------------------------------------------------------------------------
+
+1. Max Finder Template
+
+#include <iostream>
+using namespace std;
+
+template <typename T>
+T findMax(T a, T b) {
+    return (a > b) ? a : b;
+}
+
+int main() {
+    string type;
+    cin >> type;
+
+    if (type == "int") {
+        int a, b;
+        cin >> a >> b;
+        cout << findMax(a, b) << endl;
+    } else if (type == "float") {
+        float a, b;
+        cin >> a >> b;
+        cout << findMax(a, b) << endl;
+    } else if (type == "char") {
+        char a, b;
+        cin >> a >> b;
+        cout << findMax(a, b) << endl;
+    }
+
+    return 0;
+}
+✅ 2. Vector Sum Using STL
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int n, x, sum = 0;
+    cin >> n;
+    vector<int> v;
+
+    for (int i = 0; i < n; i++) {
+        cin >> x;
+        v.push_back(x);
+    }
+
+    for (int i : v) {
+        sum += i;
+    }
+
+    cout << sum << endl;
+    return 0;
+}
+✅ 3. Generic Calculator Using Class Template
+
+#include <iostream>
+using namespace std;
+
+template <class T>
+class Calculator {
+    T a, b;
+public:
+    Calculator(T x, T y) : a(x), b(y) {}
+
+    void display() {
+        cout << "Add: " << a + b << endl;
+        cout << "Subtract: " << a - b << endl;
+        cout << "Multiply: " << a * b << endl;
+        cout << "Divide: " << a / b << endl;
+    }
+};
+
+int main() {
+    int x, y;
+    cin >> x >> y;
+    Calculator<int> calc(x, y);
+    calc.display();
+    return 0;
+}
+✅ 4. Stack Operations Using STL
+
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int main() {
+    int n, x;
+    stack<int> s;
+    cin >> n;
+
+    for (int i = 0; i < n; i++) {
+        cin >> x;
+        s.push(x);
+    }
+
+    cout << "Top: " << s.top() << endl;
+    s.pop();
+    if (!s.empty())
+        cout << "Top after pop: " << s.top() << endl;
+    else
+        cout << "Stack is now empty" << endl;
+
+    return 0;
+}
+✅ 5. Sort the List Using STL
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int n, x;
+    cin >> n;
+    vector<int> v;
+
+    for (int i = 0; i < n; i++) {
+        cin >> x;
+        v.push_back(x);
+    }
+
+    sort(v.begin(), v.end());
+
+    for (int i : v) {
+        cout << i << " ";
+    }
+    cout << endl;
+
+    return 0;
+}

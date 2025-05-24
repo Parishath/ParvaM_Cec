@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+class Box
+{
+private:        // Private access specifier: members declared here are hidden from outside the class
+    int length; // Private integer variable 'length' to store the length of the box
+
+    // Declare a friend function that can access private members of Box
+    friend void printLength(Box b);
+
+public: // Public access specifier: members declared here are accessible from outside the class
+    // Constructor to initialize Box object with a length
+    Box(int l)
+    {
+        length = l; // Assign the passed value 'l' to the private member 'length'
+    }
+};
+
+// Define the friend function declared inside the class
+void printLength(Box b)
+{
+    // Access the private member 'length' directly because this function is a friend of the class Box
+    cout << "Length of the box: " << b.length << endl;
+}
+
+int main()
+{
+    Box box1(15);      // Create an object 'box1' of class Box with length initialized to 15
+    printLength(box1); // Call the friend function 'printLength' and pass 'box1' as argument
+    return 0;          // Return 0 to indicate successful program termination
+}

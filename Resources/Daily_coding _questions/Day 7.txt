@@ -1,0 +1,250 @@
+Day 7
+
+1.Basics of Pointers:
+Write a program to store and print the address and value of an integer variable using pointers.
+
+2.this Pointer:
+Create a class Student that uses the this pointer to differentiate between data members and constructor parameters.
+
+3.Dynamic Memory Allocation (new):
+Write a program to dynamically allocate memory for an integer, assign a value, and display it.
+
+4.Dynamic Memory Allocation (new/delete):
+Create a program that dynamically allocates memory for a float and deletes it after use.
+
+5.Pointer to Object:
+Define a class Book and access its member functions using a pointer to the object.
+
+6.Array of Objects Using Pointers:
+Dynamically create an array of 3 Employee objects using pointers and display their details.
+
+7.this Pointer in Setter Function:
+Create a class Box with a setter function that uses the this pointer to set the length.
+
+8.Class with Dynamically Allocated String:
+Create a class City that dynamically allocates memory for a city name using new char[].
+
+9.Object Creation with new Keyword:
+Dynamically create an object of class Car using new and call a member function.
+
+10.Delete Dynamically Created Object:
+Write a program to create and delete a dynamic object of class Animal with a constructor and destructor.
+
+---------------------------------------------------------------------------------------------------------------------------------
+
+
+1. Basics of Pointers
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int x = 10;
+    int* ptr = &x;
+    cout << "Value of x: " << *ptr << endl;
+    cout << "Address of x: " << ptr << endl;
+    return 0;
+}
+
+
+ 2. this Pointer
+
+#include <iostream>
+using namespace std;
+
+class Student {
+    int id;
+public:
+    Student(int id) {
+        this->id = id;  // Differentiating with this pointer
+    }
+
+    void display() {
+        cout << "Student ID: " << id << endl;
+    }
+};
+
+int main() {
+    Student s(101);
+    s.display();
+    return 0;
+}
+
+
+ 3. Dynamic Memory Allocation (new)
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    int* num = new int;
+    *num = 50;
+    cout << "Dynamically allocated value: " << *num << endl;
+    delete num;  // Good practice to deallocate
+    return 0;
+}
+
+ 4. Dynamic Memory Allocation (new/delete for float)
+
+#include <iostream>
+using namespace std;
+
+int main() {
+    float* f = new float(3.14f);
+    cout << "Float value: " << *f << endl;
+    delete f;
+    return 0;
+}
+
+
+ 5. Pointer to Object
+
+#include <iostream>
+using namespace std;
+
+class Book {
+public:
+    void showTitle() {
+        cout << "C++ Programming" << endl;
+    }
+};
+
+int main() {
+    Book b;
+    Book* ptr = &b;
+    ptr->showTitle();
+    return 0;
+}
+
+
+ 6. Array of Objects Using Pointers
+
+#include <iostream>
+using namespace std;
+
+class Employee {
+public:
+    string name;
+    int id;
+
+    void input() {
+        cout << "Enter name and ID: ";
+        cin >> name >> id;
+    }
+
+    void display() {
+        cout << "Name: " << name << ", ID: " << id << endl;
+    }
+};
+
+int main() {
+    Employee* emp = new Employee[3];
+    for (int i = 0; i < 3; i++) {
+        emp[i].input();
+    }
+
+    for (int i = 0; i < 3; i++) {
+        emp[i].display();
+    }
+
+    delete[] emp;
+    return 0;
+}
+
+
+ 7. this Pointer in Setter Function
+
+#include <iostream>
+using namespace std;
+
+class Box {
+    int length;
+public:
+    void setLength(int length) {
+        this->length = length;
+    }
+
+    void showLength() {
+        cout << "Length: " << length << endl;
+    }
+};
+
+int main() {
+    Box b;
+    b.setLength(15);
+    b.showLength();
+    return 0;
+}
+
+
+ 8. Class with Dynamically Allocated String
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class City {
+    char* name;
+public:
+    City(const char* n) {
+        name = new char[strlen(n) + 1];
+        strcpy(name, n);
+    }
+
+    void display() {
+        cout << "City: " << name << endl;
+    }
+
+    ~City() {
+        delete[] name;
+    }
+};
+
+int main() {
+    City c("Mumbai");
+    c.display();
+    return 0;
+}
+
+ 9. Object Creation with new Keyword
+
+#include <iostream>
+using namespace std;
+
+class Car {
+public:
+    void show() {
+        cout << "Car is running." << endl;
+    }
+};
+
+int main() {
+    Car* c = new Car;
+    c->show();
+    delete c;
+    return 0;
+}
+
+
+ 10. Delete Dynamically Created Object
+
+#include <iostream>
+using namespace std;
+
+class Animal {
+public:
+    Animal() {
+        cout << "Animal created." << endl;
+    }
+
+    ~Animal() {
+        cout << "Animal destroyed." << endl;
+    }
+};
+
+int main() {
+    Animal* a = new Animal();
+    delete a;
+    return 0;
+}
+

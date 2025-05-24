@@ -1,0 +1,348 @@
+Day 6
+
+1.Function Overloading: Create a class Math with overloaded multiply() functions for different data types.
+
+2.Operator Overloading: Overload the + operator in a class Distance to add two distance values.
+
+3.Virtual Function: Create a base class Vehicle with a virtual function showType() overridden by Bike and Bus.
+
+4.Abstract Class: Define an abstract class Account with a pure virtual function displayBalance() implemented in derived classes.
+
+5.Pure Virtual Function: Create a base class Appliance with a pure virtual start() function implemented by WashingMachine and Refrigerator.
+
+6.Compile-Time Polymorphism: Create a class Printer with overloaded print() methods for integer and string inputs.
+
+7.Abstract Salary Calculation: Implement calculateSalary() in Intern and Manager classes derived from an abstract Employee class.
+
+8.Operator Overloading (==): Overload the == operator in a class Book to compare title and price of two books.
+
+9.Base Class Pointer: Use a Shape* pointer to call draw() function implemented in Triangle and Square classes.
+
+10. Function Overloading for Info Display: Create a class Display with overloaded info() functions to show different combinations of student details.
+
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+
+1. Function Overloading
+
+#include <iostream>
+using namespace std;
+
+class Math {
+public:
+    int multiply(int a, int b) {
+        return a * b;
+    }
+
+    float multiply(float a, float b) {
+        return a * b;
+    }
+
+    int multiply(int a, int b, int c) {
+        return a * b * c;
+    }
+};
+
+int main() {
+    Math m;
+    cout << m.multiply(2, 3) << endl;
+    cout << m.multiply(2.5f, 4.0f) << endl;
+    cout << m.multiply(2, 3, 4) << endl;
+    return 0;
+}
+
+
+ 2. Operator Overloading (+)
+
+#include <iostream>
+using namespace std;
+
+class Distance {
+public:
+    int meters, centimeters;
+
+    Distance(int m = 0, int cm = 0) {
+        meters = m;
+        centimeters = cm;
+    }
+
+    Distance operator+(Distance d) {
+        Distance temp;
+        temp.centimeters = centimeters + d.centimeters;
+        temp.meters = meters + d.meters + temp.centimeters / 100;
+        temp.centimeters %= 100;
+        return temp;
+    }
+
+    void display() {
+        cout << meters << "m " << centimeters << "cm" << endl;
+    }
+};
+
+int main() {
+    Distance d1(1, 80), d2(2, 30);
+    Distance d3 = d1 + d2;
+    d3.display();
+    return 0;
+}
+
+
+ 3. Virtual Function
+
+#include <iostream>
+using namespace std;
+
+class Vehicle {
+public:
+    virtual void showType() {
+        cout << "Generic Vehicle" << endl;
+    }
+};
+
+class Bike : public Vehicle {
+public:
+    void showType() override {
+        cout << "Bike" << endl;
+    }
+};
+
+class Bus : public Vehicle {
+public:
+    void showType() override {
+        cout << "Bus" << endl;
+    }
+};
+
+int main() {
+    Vehicle* v;
+    Bike b;
+    Bus bu;
+    v = &b; v->showType();
+    v = &bu; v->showType();
+    return 0;
+}
+
+
+ 4. Abstract Class
+
+#include <iostream>
+using namespace std;
+
+class Account {
+public:
+    virtual void displayBalance() = 0;
+};
+
+class SavingsAccount : public Account {
+public:
+    void displayBalance() override {
+        cout << "Savings Account Balance: ₹5000" << endl;
+    }
+};
+
+class CurrentAccount : public Account {
+public:
+    void displayBalance() override {
+        cout << "Current Account Balance: ₹10000" << endl;
+    }
+};
+
+int main() {
+    Account* acc;
+    SavingsAccount sa;
+    CurrentAccount ca;
+
+    acc = &sa; acc->displayBalance();
+    acc = &ca; acc->displayBalance();
+    return 0;
+}
+
+
+
+ 5. Pure Virtual Function
+
+#include <iostream>
+using namespace std;
+
+class Appliance {
+public:
+    virtual void start() = 0;
+};
+
+class WashingMachine : public Appliance {
+public:
+    void start() override {
+        cout << "Washing machine started." << endl;
+    }
+};
+
+class Refrigerator : public Appliance {
+public:
+    void start() override {
+        cout << "Refrigerator started." << endl;
+    }
+};
+
+int main() {
+    Appliance* a;
+    WashingMachine wm;
+    Refrigerator r;
+
+    a = &wm; a->start();
+    a = &r; a->start();
+    return 0;
+}
+
+
+ 6. Compile-Time Polymorphism
+
+#include <iostream>
+using namespace std;
+
+class Printer {
+public:
+    void print(int num) {
+        cout << "Integer: " << num << endl;
+    }
+
+    void print(string text) {
+        cout << "String: " << text << endl;
+    }
+};
+
+int main() {
+    Printer p;
+    p.print(100);
+    p.print("Hello");
+    return 0;
+}
+
+
+ 7. Abstract Salary Calculation
+
+#include <iostream>
+using namespace std;
+
+class Employee {
+public:
+    virtual void calculateSalary() = 0;
+};
+
+class Intern : public Employee {
+public:
+    void calculateSalary() override {
+        cout << "Intern Salary: ₹8000" << endl;
+    }
+};
+
+class Manager : public Employee {
+public:
+    void calculateSalary() override {
+        cout << "Manager Salary: ₹40000" << endl;
+    }
+};
+
+int main() {
+    Employee* e;
+    Intern i;
+    Manager m;
+
+    e = &i; e->calculateSalary();
+    e = &m; e->calculateSalary();
+    return 0;
+}
+
+
+ 8. Operator Overloading (==)
+
+#include <iostream>
+using namespace std;
+
+class Book {
+public:
+    string title;
+    float price;
+
+    Book(string t, float p) : title(t), price(p) {}
+
+    bool operator==(Book b) {
+        return (title == b.title && price == b.price);
+    }
+};
+
+int main() {
+    Book b1("C++ Basics", 299.99), b2("C++ Basics", 299.99);
+    if (b1 == b2)
+        cout << "Books are equal." << endl;
+    else
+        cout << "Books are different." << endl;
+    return 0;
+}
+
+
+ 9. Base Class Pointer
+
+#include <iostream>
+using namespace std;
+
+class Shape {
+public:
+    virtual void draw() {
+        cout << "Drawing Shape" << endl;
+    }
+};
+
+class Triangle : public Shape {
+public:
+    void draw() override {
+        cout << "Drawing Triangle" << endl;
+    }
+};
+
+class Square : public Shape {
+public:
+    void draw() override {
+        cout << "Drawing Square" << endl;
+    }
+};
+
+int main() {
+    Shape* s;
+    Triangle t;
+    Square sq;
+
+    s = &t; s->draw();
+    s = &sq; s->draw();
+    return 0;
+}
+
+
+ 10. Function Overloading (Display Info)
+
+#include <iostream>
+using namespace std;
+
+class Display {
+public:
+    void info(string name) {
+        cout << "Name: " << name << endl;
+    }
+
+    void info(string name, int age) {
+        cout << "Name: " << name << ", Age: " << age << endl;
+    }
+
+    void info(string name, int age, char grade) {
+        cout << "Name: " << name << ", Age: " << age << ", Grade: " << grade << endl;
+    }
+};
+
+int main() {
+    Display d;
+    d.info("Alice");
+    d.info("Bob", 20);
+    d.info("Charlie", 21, 'A');
+    return 0;
+}

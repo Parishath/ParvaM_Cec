@@ -1,0 +1,394 @@
+Day 4
+
+1. Encapsulation and Getter/Setter
+Write a program to define a class Person that has private members name and age. Implement getter and setter functions to access and modify these private data members. Demonstrate encapsulation by creating an object of the class and accessing the private members using getter and setter methods.
+
+2. Abstract Class and Pure Virtual Function
+Create an abstract class Shape with a pure virtual function area(). Derive two classes Rectangle and Circle from Shape and implement the area() function in both derived classes. Create objects of these derived classes and calculate their area.
+
+3. Accessing Private Members Using Friend Function
+Write a program that defines two classes Rectangle and AreaCalculator. Use a friend function calculateArea() in the AreaCalculator class to access the private data members of the Rectangle class and calculate the area.
+
+4. Friend Class Example
+Create two classes Car and Mechanic. The Mechanic class is a friend of the Car class. The Car class has private members engineStatus and fuelLevel, and the Mechanic class should be able to access these private members to perform maintenance.
+
+5. Abstraction with Interface
+Design a class PaymentGateway that provides an abstract class Payment with a pure virtual function processPayment(). Create two derived classes CreditCardPayment and PayPalPayment, which implement the processPayment() function. Demonstrate polymorphism by processing payments using both classes.
+
+6. Hiding Internal Data Using Encapsulation
+Write a program where a class BankAccount has private members balance and accountNumber. Implement methods to deposit and withdraw money from the account. Ensure that the balance cannot be accessed directly by any other class.
+
+7. Abstraction with Hide Internal Data
+Create a class Employee that has private members salary and department. Provide methods to access the salary and department, but hide the internal implementation details. Demonstrate abstraction by interacting with the employee data through public methods.
+
+8. Friend Function Accessing Private Members
+Write a program that defines a class Circle with private data members radius and a friend function calculateArea(). The friend function should access the private radius member and calculate the area of the circle.
+
+9. Getters and Setters in Encapsulation
+Create a class Student with private members name and marks. Use getter and setter functions to allow access and modification of the private members. Implement a function display() to print the details of a student.
+
+ 10. Abstraction with Method Implementation
+Create a class Car with an abstract method drive(). Derive two classes ElectricCar and GasCar from Car. Each derived class should implement the drive() method differently, demonstrating abstraction and hiding the internal details of the drive functionality.
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+
+ 1. Encapsulation and Getter/Setter
+#include <iostream>
+using namespace std;
+
+class Person {
+private:
+    string name;
+    int age;
+
+public:
+    // Getter for name
+    string getName() {
+        return name;
+    }
+
+    // Setter for name
+    void setName(string n) {
+        name = n;
+    }
+
+    // Getter for age
+    int getAge() {
+        return age;
+    }
+
+    // Setter for age
+    void setAge(int a) {
+        age = a;
+    }
+};
+
+int main() {
+    Person p;
+    p.setName("John");
+    p.setAge(25);
+
+    cout << "Name: " << p.getName() << ", Age: " << p.getAge() << endl;
+    return 0;
+}
+
+ 2. Abstract Class and Pure Virtual Function
+
+#include <iostream>
+using namespace std;
+
+class Shape {
+public:
+    virtual double area() = 0;  // Pure virtual function
+};
+
+class Rectangle : public Shape {
+private:
+    double length, width;
+
+public:
+    Rectangle(double l, double w) : length(l), width(w) {}
+
+    double area() {
+        return length * width;
+    }
+};
+
+class Circle : public Shape {
+private:
+    double radius;
+
+public:
+    Circle(double r) : radius(r) {}
+
+    double area() {
+        return 3.14 * radius * radius;
+    }
+};
+
+int main() {
+    Rectangle r(5.0, 3.0);
+    Circle c(4.0);
+
+    cout << "Area of Rectangle: " << r.area() << endl;
+    cout << "Area of Circle: " << c.area() << endl;
+
+    return 0;
+}
+
+
+ 3. Accessing Private Members Using Friend Function
+
+#include <iostream>
+using namespace std;
+
+class Rectangle {
+private:
+    double length, width;
+
+public:
+    Rectangle(double l, double w) : length(l), width(w) {}
+
+    friend double calculateArea(Rectangle &r);
+};
+
+double calculateArea(Rectangle &r) {
+    return r.length * r.width;
+}
+
+int main() {
+    Rectangle r(5.0, 3.0);
+    cout << "Area of Rectangle: " << calculateArea(r) << endl;
+    return 0;
+}
+
+
+ 4. Friend Class Example
+
+#include <iostream>
+using namespace std;
+
+class Car;
+
+class Mechanic {
+public:
+    void checkCar(Car &c);
+};
+
+class Car {
+private:
+    string engineStatus;
+    int fuelLevel;
+
+public:
+    Car(string e, int f) : engineStatus(e), fuelLevel(f) {}
+
+    // Declare Mechanic as a friend class
+    friend class Mechanic;
+};
+
+void Mechanic::checkCar(Car &c) {
+    cout << "Engine Status: " << c.engineStatus << endl;
+    cout << "Fuel Level: " << c.fuelLevel << "%" << endl;
+}
+
+int main() {
+    Car c("Good", 75);
+    Mechanic m;
+    m.checkCar(c);
+    return 0;
+}
+
+
+ 5. Abstraction with Interface
+
+#include <iostream>
+using namespace std;
+
+class Payment {
+public:
+    virtual void processPayment() = 0;  // Pure virtual function
+};
+
+class CreditCardPayment : public Payment {
+public:
+    void processPayment() {
+        cout << "Processing Credit Card Payment..." << endl;
+    }
+};
+
+class PayPalPayment : public Payment {
+public:
+    void processPayment() {
+        cout << "Processing PayPal Payment..." << endl;
+    }
+};
+
+int main() {
+    Payment *payment1 = new CreditCardPayment();
+    Payment *payment2 = new PayPalPayment();
+
+    payment1->processPayment();
+    payment2->processPayment();
+
+    delete payment1;
+    delete payment2;
+
+    return 0;
+}
+
+
+ 6. Hiding Internal Data Using Encapsulation
+
+
+#include <iostream>
+using namespace std;
+
+class BankAccount {
+private:
+    double balance;
+    int accountNumber;
+
+public:
+    BankAccount(int accNo, double bal) : accountNumber(accNo), balance(bal) {}
+
+    void deposit(double amount) {
+        balance += amount;
+    }
+
+    void withdraw(double amount) {
+        if(amount <= balance) {
+            balance -= amount;
+        } else {
+            cout << "Insufficient funds!" << endl;
+        }
+    }
+
+    void displayBalance() {
+        cout << "Balance: $" << balance << endl;
+    }
+};
+
+int main() {
+    BankAccount acc(12345, 1000.0);
+    acc.deposit(500);
+    acc.withdraw(200);
+    acc.displayBalance();
+    return 0;
+}
+
+
+ 7. Abstraction with Hide Internal Data
+
+
+#include <iostream>
+using namespace std;
+
+class Employee {
+private:
+    double salary;
+    string department;
+
+public:
+    Employee(double s, string d) : salary(s), department(d) {}
+
+    void displayInfo() {
+        cout << "Salary: $" << salary << ", Department: " << department << endl;
+    }
+};
+
+int main() {
+    Employee e(50000, "HR");
+    e.displayInfo();
+    return 0;
+}
+
+
+ 8. Friend Function Accessing Private Members
+
+#include <iostream>
+using namespace std;
+
+class Circle {
+private:
+    double radius;
+
+public:
+    Circle(double r) : radius(r) {}
+
+    // Declare the friend function
+    friend double calculateArea(Circle &c);
+};
+
+double calculateArea(Circle &c) {
+    return 3.14 * c.radius * c.radius;
+}
+
+int main() {
+    Circle c(4.0);
+    cout << "Area of Circle: " << calculateArea(c) << endl;
+    return 0;
+}
+
+
+ 9. Getters and Setters in Encapsulation
+
+#include <iostream>
+using namespace std;
+
+class Student {
+private:
+    string name;
+    double marks;
+
+public:
+    // Getter and Setter for name
+    string getName() {
+        return name;
+    }
+
+    void setName(string n) {
+        name = n;
+    }
+
+    // Getter and Setter for marks
+    double getMarks() {
+        return marks;
+    }
+
+    void setMarks(double m) {
+        marks = m;
+    }
+
+    void display() {
+        cout << "Name: " << name << ", Marks: " << marks << endl;
+    }
+};
+
+int main() {
+    Student s;
+    s.setName("Alice");
+    s.setMarks(88.5);
+    s.display();
+    return 0;
+}
+
+
+ 10. Abstraction with Method Implementation
+
+#include <iostream>
+using namespace std;
+
+class Car {
+public:
+    virtual void drive() = 0;  // Pure virtual function
+};
+
+class ElectricCar : public Car {
+public:
+    void drive() {
+        cout << "Driving an electric car." << endl;
+    }
+};
+
+class GasCar : public Car {
+public:
+    void drive() {
+        cout << "Driving a gas car." << endl;
+    }
+};
+
+int main() {
+    Car *car1 = new ElectricCar();
+    Car *car2 = new GasCar();
+
+    car1->drive();
+    car2->drive();
+
+    delete car1;
+    delete car2;
+
+    return 0;
+}
